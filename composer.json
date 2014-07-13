@@ -1,0 +1,21 @@
+{
+    "name": "degaray/mock-soapclient",
+    "description": "This class is used to overwrite the functionality of the soapclient. It is very usefull when mocking objects expected from soap calls to web sevices in unit testing.",
+    "type": "library",
+    "license": "BSD Style",
+    "homepage": "https://github.com/degaray/mock-soapclient",
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "authors": [
+        {
+            "name": "Xavier de Garay",
+            "email": "degaray@yahoo.com"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "": "src/"
+        }
+    }
+}

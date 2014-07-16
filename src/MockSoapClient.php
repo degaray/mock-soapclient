@@ -5,7 +5,7 @@ class MockSoapClient extends \SoapClient
 
     public function __construct($fakeUrl, array $fakeParams = array()) {}
     
-    public function __soapCall ($function_name, array $arguments, array $options = null, $input_headers = null, array &$output_headers = null)
+    public function __soapCall ($function_name, $arguments, $options = NULL, $input_headers = NULL, &$output_headers = NULL)
     {
         $tempDummyResponse = $this->dummyResponse;
         $this->setResponse(null);

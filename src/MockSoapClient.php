@@ -1,20 +1,46 @@
 <?php
 class MockSoapClient extends \SoapClient
 {
-    protected $dummyResponse;
+    protected $dummyResponses;
 
-    public function __construct($fakeUrl, array $fakeParams = array()) {}
+    protected $lastRequest;
+
+    public function __call($name, $arguments)
+    {
+        if (isset($this->dummyResponses[$name])) {
+            return $this->dummyResponses[$name];
+        }
+
+        return null;
+    }
+    public function __construct($fakeUrl, array $fakeParams = array())
+    {
+        $this->fakeUrl = $fakeUrl;
+        $this->fakeParams = $fakeParams;
+    }
     
     public function __soapCall ($function_name, $arguments, $options = NULL, $input_headers = NULL, &$output_headers = NULL)
     {
-        $tempDummyResponse = $this->dummyResponse;
-        $this->setResponse(null);
-        
-        return $tempDummyResponse;
+        return $this->dummyResponses[$function_name];
     }
-    
-    public function setResponse($dummyResponse)
+
+
+    public function setDummyResponses(array $dummyResponses)
     {
-        $this->dummyResponse = $dummyResponse;
+        $this->dummyResponses = $dummyResponses;
+    }
+
+    public function setLastRequest($lastRequest)
+    {
+        $this->lastRequest = $lastRequest;
+    }
+
+    public function __getLastRequest()
+    {
+        if (isset($this->lastRequest)) {
+            return $this->lastRequest;
+        }
+
+        return null;
     }
 }
